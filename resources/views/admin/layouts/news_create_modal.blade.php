@@ -53,14 +53,15 @@
 				var insert_data = $('#create_form').serializeArray();
 				$('#modal-create').modal('hide');
 				insert_data.push({name:"content",value:tinymce.activeEditor.getContent()});
-				$.post('{{ asset('admin/insert_news') }}',insert_data,'json');
-				swal(
+				$.post('{{ asset('admin/insert_news') }}',insert_data,function(){
+					swal(
 					'新增成功！',
 					'已新增一則最新消息。',
 					'success'
 				);
 				var data = {};
 				news_list(data);
+			},'json');
 			})
 		})
 	}
