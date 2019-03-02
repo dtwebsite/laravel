@@ -84,3 +84,27 @@ Route::post('/admin/news_delete',[
 	'as' => 'news_delete',
 	'uses' => 'NewsController@news_delete'
 ]);
+
+Route::get('/admin/commodity_category', function () {
+    return view('admin.commodity_category');
+});
+
+Route::get('/admin/get_commodity_category',[
+	'as' => 'get_commodity_category',
+	'uses' => 'CommodityController@get_commodity_category'
+]);
+
+Route::post('/admin/insert_commodity_category',[
+	'as' => 'insert_commodity_category',
+	'uses' => 'CommodityController@insert_commodity_category'
+]);
+
+Route::post('/admin/edit_commodity_category',[
+	'as' => 'edit_commodity_category',
+	'uses' => 'CommodityController@edit_commodity_category'
+]);
+
+Route::post('/admin/commodity_category_delete',[
+	'as' => 'commodity_category_delete',
+	'uses' => 'CommodityController@commodity_category_delete'
+]);
