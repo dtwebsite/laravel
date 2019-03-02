@@ -30,6 +30,27 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('gentelella/build/css/custom.min.css') }}" rel="stylesheet">
+    <style type="text/css">
+      body{
+        font-family: 微軟正黑體,"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+      }
+      .dataTables_paginate{
+        text-align: center;
+        float: none;
+      }
+      .list_total{
+        text-align: center;
+        float: none;
+        width: auto;
+      }
+      .x_title h2{
+        margin-right: 10px;
+      }
+      .column-title{
+        display: table-cell;
+      }
+    </style>
+    @stack('style')
   </head>
 
   <body class="nav-md">
@@ -65,20 +86,12 @@
                   <li><a><i class="fa fa-dashboard"></i> 儀錶板 </a></li>
                   <li><a><i class="fa fa-male"></i> 會員管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="admin/member_list">會員列表</a></li>
+                      <li><a href="/admin/member_list">會員列表</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-newspaper-o"></i> 最新消息管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
+                      <li><a href="/admin/news_list">最新消息列表</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
