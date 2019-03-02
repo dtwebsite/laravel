@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 @section('page_content')
-<div class="modal fade" id="modal-default"></div>
+<div class="modal fade" id="modal-edit"></div>
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
@@ -20,12 +20,12 @@
 				<table class="table table-striped jambo_table bulk_action">
 					<thead>
 						<tr class="headings">
-							<th class="column-title" style="display: table-cell;"># </th>
-							<th class="column-title" style="display: table-cell;">姓名 </th>
-							<th class="column-title" style="display: table-cell;">信箱 </th>
-							<th class="column-title" style="display: table-cell;">註冊時間 </th>
-							<th class="column-title" style="display: table-cell;">最後更新時間 </th>
-							<th class="column-title" style="display: table-cell;">操作 </th>
+							<th class="column-title"># </th>
+							<th class="column-title">姓名 </th>
+							<th class="column-title">信箱 </th>
+							<th class="column-title">註冊時間 </th>
+							<th class="column-title">最後更新時間 </th>
+							<th class="column-title">操作 </th>
 						</tr>
 					</thead>
 					<tbody class="member_list">
@@ -33,12 +33,12 @@
 					</tbody>
 				</table>
 				<div>
-	    			<div class="dataTables_paginate paging_simple_numbers" style="text-align: center;float: none;">
+	    			<div class="dataTables_paginate paging_simple_numbers">
 			    		<ul class="pagination"></ul>
 			    	</div>
 			    </div>
 			    <div>
-    				<div class="member_list_total" role="status" aria-live="polite" style="text-align: center;float: none;width: auto;"></div>
+    				<div class="list_total" role="status" aria-live="polite"></div>
     			</div>
 			</div>
 		</div>
@@ -50,20 +50,20 @@
 	var data = {};
 	member_list(data);
 	function member_list(data){
-		$.get('{{ asset('admin/get_member_list') }}',data,function(e){
+		$.get('{{ asset('admin/get_member_list') }}',data,function(res){
 			var member_data = '';
 			var sequence = 1;
-			$.each(e.data,function(k,v){
+			$.each(res.data,function(k,v){
 				member_data += '<tr class="pointer">';
-				member_data += '<td>'+sequence+'</td>';
-				member_data += '<td>'+v.name+'</td>';
-				member_data += '<td>'+v.email+'</td>';
-				member_data += '<td>'+v.created_at+'</td>';
-				member_data += '<td>'+v.updated_at+'</td>';
-				member_data += '<td>\
-									<button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#modal-default" data-id="'+v.id+'">修改</button>\
-									<button type="button" class="btn btn-danger delete" data-id="'+v.id+'">刪除</button>\
-								</td>';
+				member_data += 		'<td>'+sequence+'</td>';
+				member_data += 		'<td>'+v.name+'</td>';
+				member_data += 		'<td>'+v.email+'</td>';
+				member_data += 		'<td>'+v.created_at+'</td>';
+				member_data += 		'<td>'+v.updated_at+'</td>';
+				member_data += 		'<td>\
+										<button type="button" class="btn btn-success edit" data-toggle="modal" data-target="#modal-edit" data-id="'+v.id+'">修改</button>\
+										<button type="button" class="btn btn-danger delete" data-id="'+v.id+'">刪除</button>\
+									</td>';
 				member_data += '</tr>';
 				sequence++;
 			});
@@ -84,7 +84,7 @@
 					</li>';
 			$('.pagination').html(page);
 			var total='第'+e.from+'至'+e.to+'筆，總共'+e.total+'筆';
-			$('.member_list_total').html(total);
+			$('.list_total').html(total);
 			paginate();
 			member_delete();
 			member_edit();
@@ -113,9 +113,9 @@
 				cancelButtonColor: '#d33',
 				confirmButtonText: '確定刪除！',
 				cancelButtonText: '取消刪除！',
-			}).then(function(e) {
-				if(e.value){
-					$.post('{{ asset('admin/member_delete') }}',{ id : delete_id , _token : '{{ csrf_token() }}'},'json');
+			}).then(function(res) {
+				if(res.value){
+					$.post('{{ asset('admin/member_delete') }}',{ id : delete_id , _token : '{{ csrf_token() }}' },'json');
 					swal(
 						'已刪除！',
 						'該會員已被刪除。',
@@ -141,14 +141,16 @@
             							'<h4 class="modal-title">編輯內容</h4>'+
           							'</div>'+
         							'<div class="modal-body">'+
-            							'<form name="edit_form" id="edit_form">'+
+            							'<form id="edit_form">'+
 											'{{ csrf_field() }}'+
 						    				'<div class="box-body">'+
-						    					'<div class="form-group">'+
+						    					'<div class="form-group row">'+
 						    						'<label for="edit_name" class="col-sm-2 control-label">會員名稱</label>'+
 													'<div class="col-sm-10">'+
 														'<input type="text" name="name" class="form-control" value="'+edit_name+'">'+
 													'</div>'+
+												'</div>'+
+												'<div class="form-group row">'+
 													'<label for="edit_email" class="col-sm-2 control-label">會員信箱</label>'+
     												'<div class="col-sm-10">'+
     													'<input type="text" name="email" class="form-control" value="'+edit_email+'">'+
@@ -163,10 +165,10 @@
         							'</div>'+
         						'</div>'+
     						'</div>';
-    		$('#modal-default').html(edit_str);
+    		$('#modal-edit').html(edit_str);
     		$('.save').click(function(){
     			$('#edit_form').submit();
-    			$('#modal-default').modal('hide')
+    			$('#modal-edit').modal('hide')
     		})
     		$('#edit_form').submit(function(){
     			var data = {};
