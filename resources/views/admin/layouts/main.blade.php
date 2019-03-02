@@ -49,6 +49,9 @@
       .column-title{
         display: table-cell;
       }
+      .mce-container.mce-panel.mce-foot,#the_plugin_name{
+        display: none;
+      }
     </style>
     @stack('style')
   </head>
