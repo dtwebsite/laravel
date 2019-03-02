@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
+@include('admin.layouts.member_edit_modal')
 @section('page_content')
-<div class="modal fade" id="modal-edit"></div>
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
@@ -68,22 +68,22 @@
 				sequence++;
 			});
 			$('.member_list').html(member_data);
-			var previous = e.current_page -1 == 0 ? 'disabled' : 'paginate_button';
-			var next = e.current_page == e.last_page ? 'disabled' : 'paginate_button';
-			var page = '<li class="previous '+previous+'" data-id="'+(e.current_page-1)+'">\
+			var previous = res.current_page -1 == 0 ? 'disabled' : 'paginate_button';
+			var next = res.current_page == res.last_page ? 'disabled' : 'paginate_button';
+			var page = '<li class="previous '+previous+'" data-id="'+(res.current_page-1)+'">\
 							<a href="#" data-dt-idx="0" tabindex="0">上一頁</a>\
 						</li>';
-			for(i=1;i<=e.last_page;i++){
-				var nowpage = e.current_page == i ? 'disabled' : 'paginate_button';
+			for(i=1;i<=res.last_page;i++){
+				var nowpage = res.current_page == i ? 'disabled' : 'paginate_button';
 				page += '<li class="'+nowpage+'" data-id="'+i+'">'+
 				    		'<a href="#" data-dt-idx="'+i+'" tabindex="0">'+i+'</a>'+
 				    	'</li>';
 			}
-			page += '<li class="next '+next+'" data-id="'+(e.current_page+1)+'">\
+			page += '<li class="next '+next+'" data-id="'+(res.current_page+1)+'">\
 						<a href="#" data-dt-idx="7" tabindex="0">下一頁</a>\
 					</li>';
 			$('.pagination').html(page);
-			var total='第'+e.from+'至'+e.to+'筆，總共'+e.total+'筆';
+			var total='第'+res.from+'至'+res.to+'筆，總共'+res.total+'筆';
 			$('.list_total').html(total);
 			paginate();
 			member_delete();
@@ -124,64 +124,6 @@
 					member_list(data);
 				}
 			})
-		})
-	}
-
-	function member_edit(){
-		$('.edit').click(function(){
-			var edit_name = $(this).parents('tr').find('td').eq(1).text();
-			var edit_email = $(this).parents('tr').find('td').eq(2).text();
-			var edit_id = $(this).attr('data-id');
-			var edit_str =  '<div class="modal-dialog">'+
-        				    	'<div class="modal-content">'+
-        							'<div class="modal-header">'+
-            							'<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
-            								'<span aria-hidden="true">&times;</span>'+
-            							'</button>'+
-            							'<h4 class="modal-title">編輯內容</h4>'+
-          							'</div>'+
-        							'<div class="modal-body">'+
-            							'<form id="edit_form">'+
-											'{{ csrf_field() }}'+
-						    				'<div class="box-body">'+
-						    					'<div class="form-group row">'+
-						    						'<label for="edit_name" class="col-sm-2 control-label">會員名稱</label>'+
-													'<div class="col-sm-10">'+
-														'<input type="text" name="name" class="form-control" value="'+edit_name+'">'+
-													'</div>'+
-												'</div>'+
-												'<div class="form-group row">'+
-													'<label for="edit_email" class="col-sm-2 control-label">會員信箱</label>'+
-    												'<div class="col-sm-10">'+
-    													'<input type="text" name="email" class="form-control" value="'+edit_email+'">'+
-														'<input type="hidden" name="id" value="'+edit_id+'">'+
-    												'</div>'+
-												'</div>'+
-											'</div>'+
-										'</form>'+
-          							'</div>'+
-          							'<div class="modal-footer">'+
-		                				'<button type="submit" class="btn btn-primary save">儲存</button>'+
-        							'</div>'+
-        						'</div>'+
-    						'</div>';
-    		$('#modal-edit').html(edit_str);
-    		$('.save').click(function(){
-    			$('#edit_form').submit();
-    			$('#modal-edit').modal('hide')
-    		})
-    		$('#edit_form').submit(function(){
-    			var data = {};
-    			var edit_data = $('#edit_form').serialize();
-    			$.post('{{ asset("admin/member_edit")}}',edit_data,'json');
-    			swal(
-					'更新成功！',
-					'會員資料已更新。',
-					'success'
-				);
-				member_list(data);
-    			return false;
-    		});
 		})
 	}
 </script>
