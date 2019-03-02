@@ -56,7 +56,7 @@ function init_sidebar() {
 // TODO: This is some kind of easy fix, maybe we can improve this
 var setContentHeight = function () {
 	// reset height
-	$RIGHT_COL.css('min-height', $(window).height());
+	// $RIGHT_COL.css('min-height', $(window).height());
 
 	var bodyHeight = $BODY.outerHeight(),
 		footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
@@ -4948,7 +4948,7 @@ if (typeof NProgress != 'undefined') {
 		init_InputMask();
 		init_JQVmap();
 		init_cropper();
-		init_knob();
+		// init_knob();
 		init_IonRangeSlider();
 		init_ColorPicker();
 		init_TagsInput();
