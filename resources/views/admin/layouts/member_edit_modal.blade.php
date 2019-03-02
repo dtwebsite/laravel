@@ -29,7 +29,7 @@
 				</form>
 				</div>
 				<div class="modal-footer">
-				<button type="submit" class="btn btn-primary save">儲存</button>
+				<button type="submit" class="btn btn-primary member_save">儲存</button>
 			</div>
 		</div>
 	</div>
@@ -47,9 +47,9 @@
 			$('#edit_form [name=email]').val(edit_email);
 			$('#edit_form [name=id]').val(edit_id);
 
-    		$('.save').click(function(){
+    		$('.member_save').click(function(){
     			$('#edit_form').submit();
-    			$('#modal-edit').modal('hide')
+    			$('#modal-edit').modal('hide');
     		})
     		$('#edit_form').submit(function(){
     			var data = {};
