@@ -38,7 +38,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary save">儲存</button>
+				<button type="submit" class="btn btn-primary news_edit_save">儲存</button>
 			</div>
 		</div>
 	</div>
@@ -60,9 +60,9 @@
 				$('#edit_form [name=status]').val(edit_status);
 				tinymce.activeEditor.setContent(edit_content);
 			},'json');
-			$('.save').click(function(){
+			$('.news_edit_save').click(function(){
     			$('#edit_form').submit();
-    			$('#modal-edit').modal('hide')
+    			$('#modal-edit').modal('hide');
     		})
     		$('#edit_form').submit(function(){
     			var data = {};

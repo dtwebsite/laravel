@@ -37,7 +37,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary save">儲存</button>
+				<button type="submit" class="btn btn-primary news_create_save">儲存</button>
 			</div>
 		</div>
 	</div>
@@ -49,19 +49,18 @@
 	function news_create(){
 		$('.create').click(function(){
 			$('#modal-create').modal('show');
-			$('.save').click(function(){
+			$('.news_create_save').click(function(){
 				var insert_data = $('#create_form').serializeArray();
 				$('#modal-create').modal('hide');
 				insert_data.push({name:"content",value:tinymce.activeEditor.getContent()});
-				$.post('{{ asset('admin/insert_news') }}',insert_data,function(){
-					swal(
+				$.post('{{ asset('admin/insert_news') }}',insert_data,'json');
+				swal(
 					'新增成功！',
 					'已新增一則最新消息。',
 					'success'
 				);
 				var data = {};
 				news_list(data);
-			},'json');
 			})
 		})
 	}
