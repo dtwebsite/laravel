@@ -1,3 +1,4 @@
+@section('edit_modal')
 <div class="modal fade" id="modal-edit">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -33,6 +34,7 @@
 		</div>
 	</div>
 </div>
+@endsection
 @push('script')
 <script type="text/javascript">
 	function member_edit(){

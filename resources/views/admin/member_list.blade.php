@@ -1,5 +1,6 @@
 @extends('admin.layouts.main')
 @include('admin.layouts.member_edit_modal')
+@yield('edit_modal')
 @section('page_content')
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
@@ -86,8 +87,8 @@
 			var total='第'+res.from+'至'+res.to+'筆，總共'+res.total+'筆';
 			$('.list_total').html(total);
 			paginate();
-			member_delete();
 			member_edit();
+			member_delete();
 		});
 	}
 
