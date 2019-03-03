@@ -20,10 +20,8 @@
 							</div>
 						</div>
 					</div>
+					<button type="submit" class="btn btn-primary">儲存</button>
 				</form>
-				</div>
-				<div class="modal-footer">
-				<button type="submit" class="btn btn-primary main_edit_save">儲存</button>
 			</div>
 		</div>
 	</div>
@@ -37,23 +35,20 @@
 			var edit_id = $(this).attr('data-id');
 			$('#edit_form [name=title]').val(edit_title);
 			$('#edit_form [name=id]').val(edit_id);
-
-    		$('.main_edit_save').click(function(){
-    			$('#edit_form').submit();
-    			$('#modal-main-edit').modal('hide');
-    		})
-    		$('#edit_form').submit(function(){
-    			var edit_data = $('#edit_form').serialize();
-    			$.post('{{ asset("admin/edit_commodity_category")}}',edit_data,'json');
-    			swal(
-					'更新成功！',
-					'類別名稱已更新。',
-					'success'
-				);
-				category_list();
-    			return false;
-    		});
 		})
 	}
+
+	$('#edit_form').submit(function(){
+		var edit_data = $('#edit_form').serialize();
+		$.post('{{ asset("admin/edit_commodity_category")}}',edit_data,'json');
+		swal(
+			'更新成功！',
+			'類別名稱已更新。',
+			'success'
+		);
+		$('#modal-main-edit').modal('hide');
+		category_list();
+		return false;
+	});
 </script>
 @endpush

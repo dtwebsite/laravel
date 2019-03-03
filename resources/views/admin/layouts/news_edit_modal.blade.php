@@ -35,10 +35,8 @@
 						</div>
 						<input type="hidden" name="id">
 					</div>
+					<button type="submit" class="btn btn-primary">儲存</button>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary news_edit_save">儲存</button>
 			</div>
 		</div>
 	</div>
@@ -60,24 +58,22 @@
 				$('#edit_form [name=status]').val(edit_status);
 				tinymce.activeEditor.setContent(edit_content);
 			},'json');
-			$('.news_edit_save').click(function(){
-    			$('#edit_form').submit();
-    			$('#modal-edit').modal('hide');
-    		})
-    		$('#edit_form').submit(function(){
-    			var data = {};
-    			var edit_data = $('#edit_form').serializeArray();
-    			edit_data.push({name:"content",value:tinymce.activeEditor.getContent()});
-    			$.post('{{ asset("admin/news_edit")}}',edit_data,'json');
-    			swal(
-					'更新成功！',
-					'最新消息資料已更新。',
-					'success'
-				);
-				news_list(data);
-    			return false;
-    		});
 		})
 	}
+
+	$('#edit_form').submit(function(){
+		var data = {};
+		var edit_data = $('#edit_form').serializeArray();
+		edit_data.push({name:"content",value:tinymce.activeEditor.getContent()});
+		$.post('{{ asset("admin/news_edit")}}',edit_data,'json');
+		swal(
+			'更新成功！',
+			'最新消息資料已更新。',
+			'success'
+		);
+		$('#modal-edit').modal('hide');
+		news_list(data);
+		return false;
+	});
 </script>
 @endpush

@@ -22,10 +22,8 @@
 								<input type="hidden" name="up_id">
 						</div>
 					</div>
+					<button type="submit" class="btn btn-primary">儲存</button>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary sub_create_save">儲存</button>
 			</div>
 		</div>
 	</div>
@@ -39,22 +37,19 @@
 			var up_id = $(this).attr('data-id');
 			$('#modal-sub-create').modal('show');
 			$('#sub_create_form [name=up_id]').val(up_id);
-			$('.sub_create_save').click(function(){
-    			$('#sub_create_form').submit();
-    			$('#modal-sub-create').modal('hide');
-    		})
-    		$('#sub_create_form').submit(function(){
-    			var insert_data = $('#sub_create_form').serialize();
-    			$.post('{{ asset("admin/insert_commodity_category")}}',insert_data,'json');
-    			swal(
-					'新增成功！',
-					'已新增子類別。',
-					'success'
-				);
-				category_list();
-    			return false;
-    		});
 		})
 	}
+	$('#sub_create_form').submit(function(){
+		var insert_data = $('#sub_create_form').serialize();
+		$.post('{{ asset("admin/insert_commodity_category")}}',insert_data,'json');
+		swal(
+			'新增成功！',
+			'已新增子類別。',
+			'success'
+		);
+		$('#modal-sub-create').modal('hide');
+		category_list();
+		return false;
+	});
 </script>
 @endpush

@@ -26,11 +26,9 @@
 							</div>
 						</div>
 					</div>
+					<button type="submit" class="btn btn-primary">儲存</button>
 				</form>
 				</div>
-				<div class="modal-footer">
-				<button type="submit" class="btn btn-primary member_save">儲存</button>
-			</div>
 		</div>
 	</div>
 </div>
@@ -46,24 +44,21 @@
 			$('#edit_form [name=name]').val(edit_name);
 			$('#edit_form [name=email]').val(edit_email);
 			$('#edit_form [name=id]').val(edit_id);
-
-    		$('.member_save').click(function(){
-    			$('#edit_form').submit();
-    			$('#modal-edit').modal('hide');
-    		})
-    		$('#edit_form').submit(function(){
-    			var data = {};
-    			var edit_data = $('#edit_form').serialize();
-    			$.post('{{ asset("admin/member_edit")}}',edit_data,'json');
-    			swal(
-					'更新成功！',
-					'會員資料已更新。',
-					'success'
-				);
-				member_list(data);
-    			return false;
-    		});
 		})
 	}
+
+	$('#edit_form').submit(function(){
+		var data = {};
+		var edit_data = $('#edit_form').serialize();
+		$.post('{{ asset("admin/member_edit")}}',edit_data,'json');
+		swal(
+			'更新成功！',
+			'會員資料已更新。',
+			'success'
+		);
+		$('#modal-edit').modal('hide');
+		member_list(data);
+		return false;
+	});
 </script>
 @endpush

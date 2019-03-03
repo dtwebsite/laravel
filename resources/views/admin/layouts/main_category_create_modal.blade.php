@@ -22,10 +22,8 @@
 							</div>
 						</div>
 					</div>
+					<button type="submit" class="btn btn-primary">儲存</button>
 				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary main_create_save">儲存</button>
 			</div>
 		</div>
 	</div>
@@ -37,22 +35,20 @@
 	function main_create(){
 		$('.main_create').click(function(){
 			$('#modal-main-create').modal('show');
-			$('.main_create_save').click(function(){
-    			$('#create_form').submit();
-    			$('#modal-main-create').modal('hide');
-    		})
-    		$('#create_form').submit(function(){
-    			var insert_data = $('#create_form').serialize();
-    			$.post('{{ asset("admin/insert_commodity_category")}}',insert_data,'json');
-    			swal(
-					'新增成功！',
-					'已新增大類別。',
-					'success'
-				);
-				category_list();
-    			return false;
-    		});
 		})
 	}
+
+	$('#create_form').submit(function(){
+		var insert_data = $('#create_form').serialize();
+		$.post('{{ asset("admin/insert_commodity_category")}}',insert_data,'json');
+		swal(
+			'新增成功！',
+			'已新增大類別。',
+			'success'
+		);
+		$('#modal-main-create').modal('hide');
+		category_list();
+		return false;
+	});
 </script>
 @endpush
