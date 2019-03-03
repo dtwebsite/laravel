@@ -29,17 +29,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/admin/', function () {
-    return view('admin.index');
-});
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.index');
-});
+Route::get('/admin/dashboard',[
+	'as' => 'dashboard',
+	'uses' => 'Controller@admin_index'
+]);
 
-Route::get('/admin/member_list', function () {
-    return view('admin.member_list');
-});
+Route::get('/admin/member_list',[
+	'as' => 'member_list',
+	'uses' => 'MemberController@index'
+]);
 
 Route::get('/admin/get_member_list',[
 	'as' => 'get_member_list',
@@ -56,9 +55,10 @@ Route::post('/admin/member_edit',[
 	'uses' => 'MemberController@member_edit'
 ]);
 
-Route::get('/admin/news_list', function () {
-    return view('admin.news_list');
-});
+Route::get('/admin/news_list',[
+	'as' => 'news_list',
+	'uses' => 'NewsController@index'
+]);
 
 Route::get('/admin/get_news_list',[
 	'as' => 'get_news_list',
@@ -85,9 +85,10 @@ Route::post('/admin/news_delete',[
 	'uses' => 'NewsController@news_delete'
 ]);
 
-Route::get('/admin/commodity_category', function () {
-    return view('admin.commodity_category');
-});
+Route::get('/admin/commodity_category',[
+	'as' => 'commodity_category',
+	'uses' => 'CommodityController@category_index'
+]);
 
 Route::get('/admin/get_commodity_category',[
 	'as' => 'get_commodity_category',
@@ -107,4 +108,19 @@ Route::post('/admin/edit_commodity_category',[
 Route::post('/admin/commodity_category_delete',[
 	'as' => 'commodity_category_delete',
 	'uses' => 'CommodityController@commodity_category_delete'
+]);
+
+Route::get('/admin/commodity_list',[
+	'as' => 'commodity_list',
+	'uses' => 'CommodityController@list_index'
+]);
+
+Route::get('/admin/get_commodity_list',[
+	'as' => 'get_commodity_list',
+	'uses' => 'CommodityController@get_commodity_list'
+]);
+
+Route::post('/admin/insert_commodity',[
+	'as' => 'insert_commodity',
+	'uses' => 'CommodityController@insert_commodity'
 ]);

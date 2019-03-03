@@ -8,6 +8,11 @@ use DB;
 
 class NewsController extends Controller
 {
+    public function index()
+    {
+        return view('admin.news_list');
+    }
+    
     public function get_news_list()
     {
         $data = DB::table('news')->paginate(5);

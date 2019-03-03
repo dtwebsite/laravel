@@ -7,6 +7,11 @@ use DB;
 
 class MemberController extends Controller
 {
+    public function index()
+    {
+        return view('admin.member_list');
+    }
+
     public function get_member_list()
     {
         $data = DB::table('users')->paginate(10);
