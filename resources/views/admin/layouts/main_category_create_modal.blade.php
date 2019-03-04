@@ -35,6 +35,9 @@
 	function main_create(){
 		$('.main_create').click(function(){
 			$('#modal-main-create').modal('show');
+			$('#modal-main-create').on('hidden.bs.modal',function(){
+				document.getElementById('create_form').reset();
+			});
 		})
 	}
 

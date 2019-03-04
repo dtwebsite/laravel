@@ -36,6 +36,9 @@
 		$('.sub_create').click(function(){
 			var up_id = $(this).attr('data-id');
 			$('#modal-sub-create').modal('show');
+			$('#modal-sub-create').on('hidden.bs.modal',function(){
+				document.getElementById('sub_create_form').reset();
+			});
 			$('#sub_create_form [name=up_id]').val(up_id);
 		})
 	}

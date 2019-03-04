@@ -47,8 +47,7 @@
 							<label class="col-sm-2 control-label">狀態</label>
 							<div class="col-sm-10">
 								<select name="status" class="form-control">
-									<option value="" selected="selected">請選擇</option>
-									<option value="1">啟用</option>
+									<option value="1" selected="selected">啟用</option>
 									<option value="0">停用</option>
 								</select>
 							</div>
@@ -71,6 +70,9 @@
 			var category_id = $(this).attr('data-id');
 			$('input[name=category_id]').val(category_id);
 			$('#modal-commodity-create').modal('show');
+			$('#modal-commodity-create').on('hidden.bs.modal',function(){
+				document.getElementById('create_form').reset();
+			});
 		})
 	}
 

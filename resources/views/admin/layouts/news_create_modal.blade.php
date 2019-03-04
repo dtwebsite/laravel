@@ -23,8 +23,7 @@
 							<label for="status" class="col-sm-1 control-label">狀態</label>
 							<div class="col-sm-11">
 								<select id="status" name="status" class="form-control">
-									<option value="" selected="selected">請選擇</option>
-									<option value="1">啟用</option>
+									<option value="1" selected="selected">啟用</option>
 									<option value="0">停用</option>
 								</select>
 							</div>
@@ -47,20 +46,22 @@
 	function news_create(){
 		$('.create').click(function(){
 			$('#modal-create').modal('show');
+			$('#modal-create').on('hidden.bs.modal',function(){
+				document.getElementById('create_form').reset();
+			});
 		})
 	}
 	$('#create_form').submit(function(){
 		var insert_data = $('#create_form').serializeArray();
 		insert_data.push({name:"content",value:tinymce.activeEditor.getContent()});
-		$.post('{{ asset('admin/insert_news') }}',insert_data,function(){
-			swal(
+		$.post('{{ asset('admin/insert_news') }}',insert_data,'json');
+		swal(
 				'新增成功！',
 				'已新增一則最新消息。',
 				'success'
 			);
 			var data = {};
 			news_list(data);
-		},'json');
 		$('#modal-create').modal('hide');
 		return false;
 	})
