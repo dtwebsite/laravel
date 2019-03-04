@@ -124,3 +124,23 @@ Route::post('/admin/insert_commodity',[
 	'as' => 'insert_commodity',
 	'uses' => 'CommodityController@insert_commodity'
 ]);
+
+Route::post('/admin/commodity_delete',[
+	'as' => 'commodity_delete',
+	'uses' => 'CommodityController@commodity_delete'
+]);
+
+Route::post('/admin/get_commodity_edit_data',[
+	'as' => 'get_commodity_edit_data',
+	'uses' => 'CommodityController@get_commodity_edit_data'
+]);
+
+Route::post('/admin/delete_images',[
+	'as' => 'delete_images',
+	'uses' => 'CommodityController@delete_images'
+]);
+
+Route::post('/admin/edit_commodity',[
+	'as' => 'edit_commodity',
+	'uses' => 'CommodityController@edit_commodity'
+]);

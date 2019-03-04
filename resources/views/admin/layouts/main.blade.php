@@ -30,6 +30,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('gentelella/build/css/custom.min.css') }}" rel="stylesheet">
+
     <style type="text/css">
       body{
         font-family: 微軟正黑體,"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
@@ -51,6 +52,9 @@
       }
       .mce-container.mce-panel.mce-foot,#the_plugin_name{
         display: none;
+      }
+      form button[type="submit"]{
+        float: right;
       }
     </style>
     @stack('style')
@@ -86,7 +90,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-dashboard"></i> 儀錶板 </a></li>
+                  <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> 儀錶板 </a></li>
                   <li><a><i class="fa fa-male"></i> 會員管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/admin/member_list">會員列表</a></li>
@@ -341,6 +345,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('gentelella/build/js/custom.js') }}"></script>
+
 	  @stack('script')
   </body>
 </html>

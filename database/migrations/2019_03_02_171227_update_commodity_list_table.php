@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateCommodityCategory extends Migration
+class UpdateCommodityListTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateCommodityCategory extends Migration
      */
     public function up()
     {
-        Schema::table('commodity_category', function (Blueprint $table) {
-            $table->tinyInteger('seq')->after('up_id');
+        Schema::table('commodity_list', function (Blueprint $table) {
+            $table->integer('category_id')->after('id');
         });
     }
 
@@ -25,8 +25,6 @@ class UpdateCommodityCategory extends Migration
      */
     public function down()
     {
-        Schema::table('commodity_category', function (Blueprint $table) {
-            $table->dropColumn('seq');
-        });
+        //
     }
 }
